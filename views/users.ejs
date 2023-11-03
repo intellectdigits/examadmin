@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <%- include("./partials/nav.ejs") %>
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <%- include("./partials/head.ejs") %>
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                           <br/>
+                           <h2 class="title-1 m-b-25"></h2>
+                           <div class="table table-bordered p-0">
+                               
+                               <table border="1" class="table ">
+                                   <thead class="thead-dark">
+                                       <tr>
+                                                <th>Username</th>
+                                                <th>Academic Level</th>
+                                                <th>department</th>
+                                                <th>password</th>
+                                                <th>Access Restrictions</th>
+                                               
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(typeof model!= 'undefined') {
+                                                %>
+                                                <% for (const cat of model) { %>
+                                                   <tr> <td>
+                                                     <div id="uuid" hidden><%= cat.id%></div>
+                                                      <input id="username" class="au-input au-input--full" value="  <%= cat.username%>" type="text"  placeholder="username">  
+                                         
+                                                   </td> <td>
+                                                    
+                                           
+                                                    <input id="level" class="au-input au-input--full" value="  <%= cat.level %>" type="text"  placeholder="academic level">  
+                                                 
+                                                 </td> <td>
+                                                    
+                                           
+                                                    <input id="dept" class="au-input au-input--full" value="  <%= cat.dept %>" type="text"  placeholder="email">  
+                                                 
+                                                 </td><td>
+                                                   
+                                                    <input id="password" class="au-input au-input--full" value=" <%= cat.password%>" type="text"  placeholder="password">  
+                                               
+                                                 </td>  <td>
+                                                   <div class="row">
+                                                    result:<div class="col"> <input id="result" class="au-input au-input--full" value="checked" type="checkbox" name="username" placeholder="Level" <%= cat.result%>/> </div> 
+                                                    exams: <div class="col"> <input id="exams" class="au-input au-input--full"  value="checked" type="checkbox" name="username" placeholder="Level" <%= cat.exams%>/> </div> 
+                                                    users:<div class="col">  <input id="users" class="au-input au-input--full"  value="checked" type="checkbox" name="username" placeholder="Level" <%= cat.users%>/> </div>  
+                                            </div>
+                                                 </td><td><button id="save"><i class="far fa-check-square" ></i>Save Changes</button>
+                                                    <button type="button" id="delete" class="btn btn-danger">Delete</button></td></tr></tr>
+                                                  <% } %>
+                                                
+                                                <%}%>
+                                 
+                                        </tbody>
+                                    </table>
+                                    <h3>Add Exam Officer</h3><br>
+                                    <div class="row">
+                           
+                                        <div class="col-lg-6"><input id="usernames" class="au-input au-input--full" type="text" name="username" placeholder="username"></div>
+                                        <div class="col-lg-6"><input id="passwords" class="au-input au-input--full" type="text" name="username" placeholder="password"></div>
+                                        <div class="col-lg-6"><input id="levels" class="au-input au-input--full" type="text" name="username" placeholder="Academic level"></div>
+                                        <div class="col-lg-6"><input id="depts" class="au-input au-input--full" type="text" name="username" placeholder="department"></div>
+                                        
+                                        <div class="col-lg-6"  </div>
+                                        <div class="row">
+                                            <div class="col">result: <input id="results" class="au-input au-input--full" value="checked" type="checkbox" name="username" placeholder="Level" /> </div> 
+                                         <div class="col">  exams: <input id="examss" class="au-input au-input--full"  value="checked" type="checkbox" name="username" placeholder="Level" /> </div> 
+                                           <div class="col"> users: <input id="userss" class="au-input au-input--full"  value="checked" type="checkbox" name="username" placeholder="Level" /> </div>  
+                                       </div>        </div>
+                                      <br/><button id="adduser" class="au-btn au-btn--block au-btn--green m-b-20" type="button">Save</button>
+                            
+                                </div>
+                           
+                            
+                            </div>
+                          
+                        </div>
+                      
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">recent reports</h3>
+                                        <div class="chart-info">
+                                            <div class="chart-info__left">
+                                                <div class="chart-note">
+                                                    <span class="dot dot--blue"></span>
+                                                    <span>Success</span>
+                                                </div>
+                                                <div class="chart-note mr-0">
+                                                    <span class="dot dot--green"></span>
+                                                    <span>Failure</span>
+                                                </div>
+                                            </div>
+                                            <div class="chart-info__right">
+                                                <div class="chart-statis">
+                                                    <span class="index incre">
+                                                        <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
+                                                    <span class="label">Success</span>
+                                                </div>
+                                                <div class="chart-statis mr-0">
+                                                    <span class="index decre">
+                                                        <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
+                                                    <span class="label">Failure</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="recent-report__chart">
+                                            <canvas id="recent-rep-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="au-card chart-percent-card">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 tm-b-5">char by %</h3>
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6">
+                                                <div class="chart-note-wrap">
+                                                    <div class="chart-note mr-0 d-block">
+                                                        <span class="dot dot--blue"></span>
+                                                        <span>Sucess</span>
+                                                    </div>
+                                                    <div class="chart-note mr-0 d-block">
+                                                        <span class="dot dot--red"></span>
+                                                        <span>Failure</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="percent-chart">
+                                                    <canvas id="percent-chart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                                        <div class="bg-overlay bg-overlay--blue"></div>
+                                        <h3>
+                                            <i class="zmdi zmdi-account-calendar"></i>26 April, 2018</h3>
+                                        <button class="au-btn-plus">
+                                            <i class="zmdi zmdi-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="au-task js-list-load">
+                                        <div class="au-task__title">
+                                            <p>Tasks for John Doe</p>
+                                        </div>
+                                        <div class="au-task-list js-scrollbar3">
+                                            <div class="au-task__item au-task__item--danger">
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="#">Meeting about plan for Admin Template 2018</a>
+                                                    </h5>
+                                                    <span class="time">10:00 AM</span>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--warning">
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="#">Create new task for Dashboard</a>
+                                                    </h5>
+                                                    <span class="time">11:00 AM</span>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="#">Meeting about plan for Admin Template 2018</a>
+                                                    </h5>
+                                                    <span class="time">02:00 PM</span>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--success">
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="#">Create new task for Dashboard</a>
+                                                    </h5>
+                                                    <span class="time">03:30 PM</span>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--danger js-load-item">
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="#">Meeting about plan for Admin Template 2018</a>
+                                                    </h5>
+                                                    <span class="time">10:00 AM</span>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--warning js-load-item">
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="#">Create new task for Dashboard</a>
+                                                    </h5>
+                                                    <span class="time">11:00 AM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="au-task__footer">
+                                            <button class="au-btn au-btn-load js-load-btn">load more</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                                    <div class="au-card-title" style="background-image:url('images/bg-title-02.jpg');">
+                                        <div class="bg-overlay bg-overlay--blue"></div>
+                                        <h3>
+                                            <i class="zmdi zmdi-comment-text"></i>New Messages</h3>
+                                        <button class="au-btn-plus">
+                                            <i class="zmdi zmdi-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="au-inbox-wrap js-inbox-wrap">
+                                        <div class="au-message js-list-load">
+                                            <div class="au-message__noti">
+                                                <p>You Have
+                                                    <span>2</span>
+
+                                                    new messages
+                                                </p>
+                                            </div>
+                                            <div class="au-message-list">
+                                                <div class="au-message__item unread">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap">
+                                                                <div class="avatar">
+                                                                    <img src="/images/icon/avatar-02.jpg" alt="John Smith">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name">John Smith</h5>
+                                                                <p>Have sent a photo</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="au-message__item-time">
+                                                            <span>12 Min ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="au-message__item unread">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap online">
+                                                                <div class="avatar">
+                                                                    <img src="/images/icon/avatar-03.jpg" alt="Nicholas Martinez">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name">Nicholas Martinez</h5>
+                                                                <p>You are now connected on message</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="au-message__item-time">
+                                                            <span>11:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="au-message__item">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap online">
+                                                                <div class="avatar">
+                                                                    <img src="/images/icon/avatar-04.jpg" alt="Michelle Sims">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name">Michelle Sims</h5>
+                                                                <p>Lorem ipsum dolor sit amet</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="au-message__item-time">
+                                                            <span>Yesterday</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="au-message__item">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap">
+                                                                <div class="avatar">
+                                                                    <img src="/images/icon/avatar-05.jpg" alt="Michelle Sims">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name">Michelle Sims</h5>
+                                                                <p>Purus feugiat finibus</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="au-message__item-time">
+                                                            <span>Sunday</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="au-message__item js-load-item">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap online">
+                                                                <div class="avatar">
+                                                                    <img src="/images/icon/avatar-04.jpg" alt="Michelle Sims">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name">Michelle Sims</h5>
+                                                                <p>Lorem ipsum dolor sit amet</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="au-message__item-time">
+                                                            <span>Yesterday</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="au-message__item js-load-item">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap">
+                                                                <div class="avatar">
+                                                                    <img src="/images/icon/avatar-05.jpg" alt="Michelle Sims">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name">Michelle Sims</h5>
+                                                                <p>Purus feugiat finibus</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="au-message__item-time">
+                                                            <span>Sunday</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__footer">
+                                                <button class="au-btn au-btn-load js-load-btn">load more</button>
+                                            </div>
+                                        </div>
+                                        <div class="au-chat">
+                                            <div class="au-chat__title">
+                                                <div class="au-chat-info">
+                                                    <div class="avatar-wrap online">
+                                                        <div class="avatar avatar--small">
+                                                            <img src="/images/icon/avatar-02.jpg" alt="John Smith">
+                                                        </div>
+                                                    </div>
+                                                    <span class="nick">
+                                                        <a href="#">John Smith</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="au-chat__content">
+                                                <div class="recei-mess-wrap">
+                                                    <span class="mess-time">12 Min ago</span>
+                                                    <div class="recei-mess__inner">
+                                                        <div class="avatar avatar--tiny">
+                                                            <img src="/images/icon/avatar-02.jpg" alt="John Smith">
+                                                        </div>
+                                                        <div class="recei-mess-list">
+                                                            <div class="recei-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
+                                                            <div class="recei-mess">Donec tempor, sapien ac viverra</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="send-mess-wrap">
+                                                    <span class="mess-time">30 Sec ago</span>
+                                                    <div class="send-mess__inner">
+                                                        <div class="send-mess-list">
+                                                            <div class="send-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-chat-textfield">
+                                                <form class="au-form-icon">
+                                                    <input class="au-input au-input--full au-input--h65" type="text" placeholder="Type a message">
+                                                    <button class="au-input-icon">
+                                                        <i class="zmdi zmdi-camera"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="/vendor/slick/slick.min.js">
+    </script>
+    <script src="/vendor/wow/wow.min.js"></script>
+    <script src="/vendor/animsition/animsition.min.js"></script>
+    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="/js/main.js"></script>
+    <script>
+        const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        const yValues = [55, 49, 44, 24, 15];
+        const barColors = ["red", "green","blue","orange","brown"];
+        
+        new Chart("percent-chart", {
+          type: "pie",
+          data: {
+            labels: xValues,
+            datasets: [{
+              backgroundColor: barColors,
+              data: yValues
+            }]
+          },
+          options: {
+            legend: {display: false},
+            title: {
+              display: true,
+              text: "World Wine Production 2018"
+            }
+          }
+        });
+        </script>
+<script>
+    $(document).ready(function(){
+        $("#cata").empty();
+        $("#cata").append(` <a href="/cat/:${localStorage.getItem("user")}">
+                      <i class="fas fa-chart-bar"></i>Examination Recordd</a>`)
+                      $("#schoola").empty();
+        $("#schoola").append(` <a href="/users/:${localStorage.getItem("school")}">
+                      <i class="fas fa-chart-bar"></i>Exam Officer</a>`)
+                      $("#userpics").empty();
+        $("#userpics").append(`   <a href="#">${localStorage.getItem("user")}</a>`)
+        $(document).on("click","#delete",function(){
+         //   alert("gfgf")
+            let id=$(this).closest('tr').find('#uuid').text();
+            $.ajax({
+      type: "POST",
+      url: "/deluser",
+      data:{id:id},
+      success(data) {
+      alert("deleted")
+       location.reload();
+     
+                        
+      },
+  });  
+        }); 
+      $(document).on("click","#save",function(){
+        if($(this).closest('tr').find('#result').prop('checked')){
+            $(this).closest('tr').find('#result').val("checked"); 
+        }else{
+            $(this).closest('tr').find('#result').val("unchecked"); 
+        }
+        if($(this).closest('tr').find('#exams').prop('checked')){
+            $(this).closest('tr').find('#exams').val("checked"); 
+        }else{
+            $(this).closest('tr').find('#exams').val("unchecked"); 
+        }
+        if($(this).closest('tr').find('#users').prop('checked')){
+            $(this).closest('tr').find('#users').val("checked"); 
+        }else{
+            $(this).closest('tr').find('#users').val("unchecked"); 
+        }
+     
+       let id=$(this).closest('tr').find('#uuid').text();
+        let username=$(this).closest('tr').find('#username').val();
+        let level=$(this).closest('tr').find('#level').val();
+        let password=$(this).closest('tr').find('#password').val();
+        let dept=$(this).closest('tr').find('#dept').val(); 
+        
+        let result=$(this).closest('tr').find('#result').val();
+        let exams=$(this).closest('tr').find('#exams').val();
+        let users=$(this).closest('tr').find('#users').val();
+        if(username!='' &&password!=''){
+           
+        $.ajax({
+      type: "POST",
+      url: "/updateusers",
+      data:{id:id,username:username,level:level, dept:dept, password:password,result:result, exams:exams,users:users,school:localStorage.getItem("orgnames")},
+      success(data) {
+      
+       location.reload();
+     
+                        
+      },
+  });}else{alert("enter value in all fields")}
+      })
+      $(document).on("click","#adduser",function(){
+        if($('#results').prop('checked')){
+            $('#results').val("checked"); 
+        }else{
+            $('#results').val("unchecked"); 
+        }
+        if($('#examss').prop('checked')){
+            $('#examss').val("checked"); 
+        }else{
+            $('#examss').val("unchecked"); 
+        }
+        if($('#userss').prop('checked')){
+            $('#userss').val("checked"); 
+        }else{
+            $('#userss').val("unchecked"); 
+        }
+     
+     
+        let username=$('#usernames').val();
+        let levels=$('#levels').val();
+        let password=$('#passwords').val();
+        let level=$('#levels').val();
+        let result=$('#results').val();
+        let exams=$('#examss').val();
+        let users=$('#userss').val();
+        let dept=$('#depts').val();
+        if(username!='' &&password!=''){
+           
+        $.ajax({
+      type: "POST",
+      url: "/registerUser",
+      data:{username:username, dept:dept, level:levels, password:password,result:result, exams:exams,users:users,school:localStorage.getItem("school")},
+      success(data) {
+     
+       location.reload();
+     
+                        
+      },
+  });}else{alert("enter value in all fields")}
+      })
+      if(localStorage.getItem("user")===null || localStorage.getItem("user")==="" ){
+     location.href="/Setup"
+       }
+    })
+</script>
+</body>
+
+</html>
+<!-- end document-->
