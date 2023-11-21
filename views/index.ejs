@@ -564,24 +564,7 @@
    
 <script>
     $(document).ready(function(){
-       
-        if($("#user").text()!==null||localStorage.getItem("user")===null){
-         localStorage.setItem("user",$("#user").text())   
-         localStorage.setItem("school",$("#school").text()) 
-         localStorage.setItem("level",$("#level").text()) 
-         localStorage.setItem("dept",$("#dept").text()) 
-         
-        }
-       if(localStorage.getItem("user")===null || localStorage.getItem("user")==="" ){
-     location.href="/Setup"
-
-       }
-       $("#cata").empty();
-        $("#cata").append(` <a href="/cat/:${localStorage.getItem("user")}">
-                      <i class="fas fa-chart-bar"></i>Examination Record</a>`)
-                      $("#schoola").empty();
-        $("#schoola").append(` <a href="/users/:${localStorage.getItem("school")}">
-                      <i class="fas fa-chart-bar"></i>Examination Record</a>`)
+      //  location.href="/login"
     })
     
 </script>

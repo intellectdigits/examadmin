@@ -94,11 +94,11 @@
                                         </tbody>
                                     </table>
                                     <h3> Add Student</h3>
-                                    <div class="row">
-                          
-                                        <div class="col-lg-6"><input id="level" class="au-input au-input--full" type="text" name="username" placeholder="Level"></div>
+                                    <div >
                                         <div class="col-lg-6"><input id="stud_name" class="au-input au-input--full" type="text" name="username" placeholder="Student Name"></div>
-                                        <div class="col-lg-6"><input id="dept" class="au-input au-input--full" type="text" name="username" placeholder="Department"></div>
+                     
+                                        <div class="col-lg-6"><input id="level" class="au-input au-input--full" type="text" name="username" placeholder="Level"></div>
+                                                         <div class="col-lg-6"><input id="dept" class="au-input au-input--full" type="text" name="username" placeholder="Department"></div>
                                             </div>
                                       <br/><button id="addcat" class="au-btn au-btn--block au-btn--green m-b-20" type="button">Add Student</button>
                             
@@ -118,23 +118,23 @@
                                             <div class="chart-info__left">
                                                 <div class="chart-note">
                                                     <span class="dot dot--blue"></span>
-                                                    <span>products</span>
+                                                    <span>Success</span>
                                                 </div>
                                                 <div class="chart-note mr-0">
                                                     <span class="dot dot--green"></span>
-                                                    <span>services</span>
+                                                    <span>Failures</span>
                                                 </div>
                                             </div>
                                             <div class="chart-info__right">
                                                 <div class="chart-statis">
                                                     <span class="index incre">
                                                         <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
-                                                    <span class="label">products</span>
+                                                    <span class="label">Success</span>
                                                 </div>
                                                 <div class="chart-statis mr-0">
                                                     <span class="index decre">
                                                         <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
-                                                    <span class="label">services</span>
+                                                    <span class="label">Failures</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,11 +153,11 @@
                                                 <div class="chart-note-wrap">
                                                     <div class="chart-note mr-0 d-block">
                                                         <span class="dot dot--blue"></span>
-                                                        <span>products</span>
+                                                        <span>Success</span>
                                                     </div>
                                                     <div class="chart-note mr-0 d-block">
                                                         <span class="dot dot--red"></span>
-                                                        <span>services</span>
+                                                        <span>Failures</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,7 +171,6 @@
                                 </div>
                             </div>
                         </div>
-                     
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
@@ -500,12 +499,7 @@
       },
   });}else{alert("enter value in all fields")}
       })
-      if($("#orgnames").text()!==null&&localStorage.getItem("orgnames")===null){
-         localStorage.setItem("orgnames",$("#orgnames").text())   
-        }
-       if(localStorage.getItem("orgnames")===null || localStorage.getItem("orgnames")==="" ){
-        location.href="/Setup"
-       }
+      c
     })
 </script>
 </body>

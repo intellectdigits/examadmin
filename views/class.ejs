@@ -56,74 +56,54 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <h2 class="title-1 m-b-25"><%=user%></h2>
-                                <div class="col-lg-6"><select id="class" style="height:40px;font-size: larger;" class="au-input au-input--full" ></select></div>
-                                <div class="table-responsive table--no-card m-b-40">
-                                <table class="table" border=1>
-                                        <thead>
+                           <br/>
+                                <h2 class="title-1 m-b-25"></h2>
+                                <div class="table table-bordered p-0">
+                                    
+                                    <table border="1" class="table ">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <th>Student Name</th>
-                                                        <th>Semester</th>
-                                        
-                                                        <th>Subject</th>
-                                                        <th>CAT Score</th>
-                                                        <th>Exam Score</th>
-                                                        <th>Actions</th>
-                                                        
-                                                    </tr>
+                                                <th>Class Name</th>
+                                                <th>Class Teacher</th>
+                                               
+                                                <th>Actions</th>
+                                              
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             <% if(typeof model!= 'undefined') {
                                                 %>
                                                 <% for (const cat of model) { %>
-                                                    <tr style="background-color:white;">
-                                                        <td class="rows" > <div id="uuid" hidden><%= cat.id%></div>
-                                                            <input  type="text"  id="reg_nos" value="<%= cat.reg_no %>" name="username" placeholder="Registration No" ><div class="tip" id="tip1"><td id="sno" class="rows" hidden>1</td></td>
-                                                                <td class="rows" >
+                                                   <tr> <td>
+                                                    <div id="uuid" hidden><%= cat.id%></div>
+                                                      <input id="level" class="au-input au-input--full" value=" <%= cat.class %>" type="text" name="username" placeholder="Level">  
+                                                   </td> <td>
                                                     
-                                                                    <input id="semesters" value="<%= cat.semester%>" type="text" name="username" placeholder="Semester">  
-                                                                   
-                                                                 </td><td>
-                                                                    
-                                                                    <input id="course_codes" value="<%= cat.course_code %>" type="text" name="username" placeholder="Level">  
-                                                                 
-                                                                 </td><td>
-                                                                   
-                                                                    <input id="cats"  value=" <%= cat.cat %>" type="text" name="username" placeholder="Level">  
-                                                                     
-                                                                 </td> </td> <td>
-                                                                    
-                                                                    <input id="exams"  value="<%= cat.exam %>" type="text" name="username" placeholder="Level">  
-                                                                 
-                                                                 </td><td><button id="save" type="button" ><i class="far fa-check-square" ></i>Save</button>
-                                                                    <button type="button" id="delete" class="btn btn-danger">X Delete</button></td>
-                                                        
-                                                    </tr>
+                                                    <input id="level" class="au-input au-input--full" value="<%= cat.class_teacher %>" type="text" name="username" placeholder="Level">  
+                                                
+                                                 </td> <td><button type="button" class="btn btn-success">Save Changes</button>
+                                                    <button type="button" id="delete" class="btn btn-danger">Delete</button></td> </tr>
                                                   <% } %>
                                                 
                                                 <%}%>
-                                 
+                                               
                                         </tbody>
                                     </table>
-                                </div></div>
-                              
+                                    <h3> Add Class</h3>
+                                    <div class="row">
+                          
+                                        <div class="col-lg-6"><input id="class" class="au-input au-input--full" type="text" name="username" placeholder="Class"></div>
+                                        <div class="col-lg-6"><input id="class_teacher" class="au-input au-input--full" type="text" name="username" placeholder="Class Teacher"></div>
+                                       
+                                            </div>
+                                      <br/><button id="addcat" class="au-btn au-btn--block au-btn--green m-b-20" type="button">Save</button>
+                            
+                                </div>
+                           
+                            
                             </div>
-                            <h3>Add New Score</h3>
-                                <div class="col-lg-6"><input id="reg_no" class="au-input au-input--full" type="text" name="username" placeholder="Student Name"><p id="namehint"></p></div>
-                                <div class="col-lg-6"> <select id="semester"class="au-input au-input--full"> <option>First Term</option> <option>Second Term</option> <option>Third Term</option></select></div>
-                              
-                               
-                                <div class="col-lg-6"><input id="course_code" class="au-input au-input--full" value="<%=user%>"  name="username" placeholder="Subject" hidden></div>
-
-                              
-                                <div class="col-lg-6"><input id="cat" class="au-input au-input--full" type="number" name="username" placeholder="Continous assesment Score"></div>
-                                <div class="col-lg-6"><input id="exam" class="au-input au-input--full" type="number" name="username" placeholder="Examination Score"></div>
-                              </div>
-                              <br/><button id="addcat" class="au-btn au-btn--block au-btn--green m-b-20" type="button">Save</button>
-                   
+                          
                         </div>
-               
                       
                         <div class="row">
                             <div class="col-lg-6">
@@ -440,8 +420,13 @@
                                 </div>
                             </div>
                         </div>
-                         <!--footer-->
-                         <%- include("./partials/footer.ejs") %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -477,145 +462,44 @@
    
 <script>
     $(document).ready(function(){
-    function getdata(){
-        $.ajax({
-      type: "POST",
-      url: "/getcat",
-    data:{grade:$("#class option:selected").text().trim()},
-      success(response) {
-        
-       
-        $("tbody").empty();
-        $.each(response, function (key, value) { 
-                       
- $("tbody").append(` <tr style="background-color:white;">
-                                                        <td class="rows" > <div id="uuid" hidden>${value["id"]}</div>
-                                                            <input  type="text"  id="reg_nos" value="${value["reg_no"]}" name="username" placeholder="Registration No" ><div class="tip" id="tip1"><td id="sno" class="rows" hidden>1</td></td>
-                                                                <td class="rows" >
-                                                    
-                                                                    <input id="semesters" value="${value["semester"]}" type="text" name="username" placeholder="Semester">  
-                                                                   
-                                                                 </td><td>
-                                                                    
-                                                                    <input id="course_codes" value="${value["course_code"]}" type="text" name="username" placeholder="Level">  
-                                                                 
-                                                                 </td><td>
-                                                                   
-                                                                    <input id="cats"  value=" ${value["cat"]}" type="text" name="username" placeholder="Level">  
-                                                                     
-                                                                 </td> </td> <td>
-                                                                    
-                                                                    <input id="exams"  value="${value["exam"]}" type="text" name="username" placeholder="Level">  
-                                                                 
-                                                                 </td><td><button id="save" type="button" ><i class="far fa-check-square" ></i>Save</button>
-                                                                    <button type="button" id="delete" class="btn btn-danger">X Delete</button></td>
-                                                        
-                                                    </tr>`);
-                                          });
-  
-                        
-      },
-  }); 
-    }
-       
-        
- $(document).on("change","#class",function(){
-  getdata();
-  
- })
-        $.ajax({
-      type: "GET",
-      url: "/getclass",
-    
-      success(response) {
-        $.each(response, function (key, value) { 
-                       
-                      		
-                                            $("#class").append(`<option>${value['class']}</option>`);
-                                          });
-  
-                        
-      },
-  }); 
-        $(document).on("click","#namehint",function(){
-            $("#reg_no").val($("#namehint").text())
-            $("#namehint").empty();
-        })
-        $(document).on("keyup","#reg_no",function(){
-            $.ajax({
-      type: "POST",
-      url: "/namehint",
-      data:{stud_name:$("#reg_no").val()},
-      success(data) {
-  $("#namehint").text(data);
-  
-                        
-      },
-  });  
-        });      
+        $(document).on("click","#search",function(){
+            alert("fgfg")
+        });
         $(document).on("click","#delete",function(){
-          
+         //   alert("gfgf")
             let id=$(this).closest('tr').find('#uuid').text();
             $.ajax({
       type: "POST",
-      url: "/delcat",
+      url: "/delstud",
       data:{id:id},
       success(data) {
-  
-       getdata()
+      alert("deleted")
+       location.reload();
      
                         
       },
   });  
-        });  
-        $("#addcat").click(function(){
-        let semester= $('#semester').find(":selected").text();
-        let course_code=$("#course_code").val();
-        let reg_no=$("#reg_no").val();
-        let cat=$("#cat").val();
-        let exam=$("#exam").val();
-        let classlevel=$("#class option:selected").text();
-        let level= localStorage.getItem("levels                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ")
-        let dept= localStorage.getItem("dept")
-        let user= localStorage.getItem("user")
+        }); 
+      $("#addcat").click(function(){
+        let level=$("#class").val();
+        let class_teacher=$("#class_teacher").val();
+     
         
-        if(semester!='' &&course_code!=''&&reg_no!=''&& cat!=''&& exam!=''){
-           
+        if(level!='' &&class_teacher!=''){
+          
         $.ajax({
       type: "POST",
-      url: "/addcat",
-      data:{semester:semester,reg_no:reg_no,course_code:course_code,level:classlevel,dept:dept, user:user,cat:cat,exam:exam,school:localStorage.getItem("school")},
+      url: '/addclass',
+      data:{level:level,class_teacher:class_teacher},
       success(data) {
       
- getdata()
+       location.reload();
      
                         
       },
   });}else{alert("enter value in all fields")}
-      }) 
-      $(document).on("click","#save",function(){
-        let id=$(this).closest('tr').find('#uuid').text();
-        let reg_no=$(this).closest('tr').find('#reg_nos').val();
-        let course_code=$(this).closest('tr').find('#course_codes').val();
-        let exam=$(this).closest('tr').find('#exams').val();
-        let cat=$(this).closest('tr').find('#cats').val();
-        let semester=$(this).closest('tr').find('#semesters').val();
-        if(semester!='' &&course_code!=''&&reg_no!=''&& cat!=''&& exam!=''){
-         
-        $.ajax({
-      type: "POST",
-      url: "/updatecat",
-      data:{semester:semester,reg_no:reg_no,course_code:course_code,cat:cat,exam:exam,school:localStorage.getItem("school"),id:id},
-      success(data) {
-    getdata()
-     
-                        
-      },
-  });}else{alert("enter value in all fields")}
-      }) 
-      if($("#user").text()==''){
-            location.href="/login"
-        }
+      })
+      c
     })
 </script>
 </body>

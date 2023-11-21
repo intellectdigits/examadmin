@@ -63,7 +63,7 @@
                                <table border="1" class="table ">
                                    <thead class="thead-dark">
                                        <tr>
-                                                <th>Username</th>
+                                                <th>Subject</th>
                                                 <th>Academic Level</th>
                                                 <th>department</th>
                                                 <th>password</th>
@@ -78,21 +78,21 @@
                                                 <% for (const cat of model) { %>
                                                    <tr> <td>
                                                      <div id="uuid" hidden><%= cat.id%></div>
-                                                      <input id="username" class="au-input au-input--full" value="  <%= cat.username%>" type="text"  placeholder="username">  
+                                                      <input id="username" class="au-input au-input--full" value="<%= cat.username%>" type="text"  placeholder="username">  
                                          
                                                    </td> <td>
                                                     
                                            
-                                                    <input id="level" class="au-input au-input--full" value="  <%= cat.level %>" type="text"  placeholder="academic level">  
+                                                    <input id="level" class="au-input au-input--full" value="<%= cat.level %>" type="text"  placeholder="academic level">  
                                                  
                                                  </td> <td>
                                                     
                                            
-                                                    <input id="dept" class="au-input au-input--full" value="  <%= cat.dept %>" type="text"  placeholder="email">  
+                                                    <input id="dept" class="au-input au-input--full" value="<%= cat.dept %>" type="text"  placeholder="email">  
                                                  
                                                  </td><td>
                                                    
-                                                    <input id="password" class="au-input au-input--full" value=" <%= cat.password%>" type="text"  placeholder="password">  
+                                                    <input id="password" class="au-input au-input--full" value="<%= cat.password%>" type="text"  placeholder="password">  
                                                
                                                  </td>  <td>
                                                    <div class="row">
@@ -108,10 +108,10 @@
                                  
                                         </tbody>
                                     </table>
-                                    <h3>Add Exam Officer</h3><br>
+                                    <h3>Add Subject Teacher</h3><br>
                                     <div class="row">
                            
-                                        <div class="col-lg-6"><input id="usernames" class="au-input au-input--full" type="text" name="username" placeholder="username"></div>
+                                        <div class="col-lg-6"><input id="usernames" class="au-input au-input--full" type="text" name="username" placeholder="Subject"></div>
                                         <div class="col-lg-6"><input id="passwords" class="au-input au-input--full" type="text" name="username" placeholder="password"></div>
                                         <div class="col-lg-6"><input id="levels" class="au-input au-input--full" type="text" name="username" placeholder="Academic level"></div>
                                         <div class="col-lg-6"><input id="depts" class="au-input au-input--full" type="text" name="username" placeholder="department"></div>
@@ -511,14 +511,7 @@
         </script>
 <script>
     $(document).ready(function(){
-        $("#cata").empty();
-        $("#cata").append(` <a href="/cat/:${localStorage.getItem("user")}">
-                      <i class="fas fa-chart-bar"></i>Examination Recordd</a>`)
-                      $("#schoola").empty();
-        $("#schoola").append(` <a href="/users/:${localStorage.getItem("school")}">
-                      <i class="fas fa-chart-bar"></i>Exam Officer</a>`)
-                      $("#userpics").empty();
-        $("#userpics").append(`   <a href="#">${localStorage.getItem("user")}</a>`)
+      
         $(document).on("click","#delete",function(){
          //   alert("gfgf")
             let id=$(this).closest('tr').find('#uuid').text();
@@ -614,9 +607,7 @@
       },
   });}else{alert("enter value in all fields")}
       })
-      if(localStorage.getItem("user")===null || localStorage.getItem("user")==="" ){
-     location.href="/Setup"
-       }
+    
     })
 </script>
 </body>
