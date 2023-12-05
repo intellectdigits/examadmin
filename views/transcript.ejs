@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Exam Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="./vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="./vendors/chartist/chartist.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="./images/favicon.png" />
+  </head>
+  <body>
+    <% if(typeof admin!= 'undefined' && admin!='') {
+      %>
+    <div id="admin" hidden><%=admin%></div>
+    <%}%>
+    <% if(typeof admin!= 'undefined' && admin!='') {
+      %>
+      <div id="results" hidden><%=exam%></div>
+    <%}%>
+    <% if(typeof admin!= 'undefined' && admin!='') {
+      %>
+      <div id="stud" hidden><%=stud%></div>
+    <%}%>
+     
+               
+    <div class="col-lg-6"><input id="course_code" class="form-control" value="<%=user%>"  name="username" placeholder="Subject" hidden></div>
+    <div class="col-lg-6"><input id="course_code" class="form-control" value="<%=user%>"  name="username" placeholder="Subject" hidden></div>
+              
+
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+ 
+      <%-include("./partials/navbar.ejs") %>
+   
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+       
+        <%-include("./partials/AdminSidebar.ejs") %>
+       
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+         <br>
+
+              <div class="row">
+               
+                <div class="col-lg-6">  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Department</label>  <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By Department</button>
+                      <div class="dropdown-menu" id="myDropdown">
+                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                        <a class="dropdown-item" href="#" ><span  id="course" > Action1</span></a>
+                        <a class="dropdown-item" href="#"  ><span id="course"  > Action2</span></a>
+                        <a class="dropdown-item" href="#"  ><span id="course"  > Action3</span></a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"  ><span id="course"  > Action4</span></a>
+                      </div>
+                    </div>
+                    <input type="text" id="setcourse" class="form-control" aria-label="Text input with dropdown button">
+                  </div>
+                </div></div>
+                <div class="col-lg-6">  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Academic Session</label>
+                  <input type="text" id="datepicker"  class="form-control" /></p></div>
+                  <script>function filterFunction() {
+                    var input, filter, ul, li, a, i;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    div = document.getElementById("myDropdown");
+                    a = div.getElementsByTagName("a");
+                    for (i = 0; i < a.length; i++) {
+                      txtValue = a[i].textContent || a[i].innerText;
+                      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                      } else {
+                        a[i].style.display = "none";
+                      }
+                    }
+                  }
+                  const colorSelectors = document.querySelector("#myDropdown");
+                  
+                  /* define event listeners */
+                  const loadEventListeners = () => {
+                  
+                      colorSelectors.addEventListener("click", (e) => {
+                          e.preventDefault();
+                      
+                          $("#setcourse").val(e.target.innerText)
+                              $("#deptcourses").text(`Department of ${e.target.innerText} Courses`)
+                      });
+                  }
+                  
+                  /* Load all event listeners */
+                  loadEventListeners();
+                  </script>
+            </div>
+            
+             <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Score Sheets</h4>
+                  
+                    </p>
+                    <table class="table" border=1 style="background-color: white;">
+                        <thead>
+                            <tr id="row">
+                              <th>Students</th>
+                                        
+                                    </tr>
+                        </thead>
+                        <tbody id="tbody">
+                         
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="d-flex mt-4 flex-wrap"  id="pagination">
+              
+                <nav class="ml-auto" id="cc">
+                  <ul class="pagination separated pagination-info" id="pages">
+                    <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
+                  </ul>
+                </nav>
+              </div>
+ 
+
+            
+            
+            
+        
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="./vendors/chart.js/Chart.min.js"></script>
+    <script src="./vendors/moment/moment.min.js"></script>
+    <script src="./vendors/daterangepicker/daterangepicker.js"></script>
+    <script src="./vendors/chartist/chartist.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="./js/dashboard.js"></script>
+    <!-- End custom js for this page -->
+    <!-- jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="/js/main.js"></script>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+<script>
+  $("#datepicker").datepicker({
+    format: "yyyy",
+    viewMode: "years", 
+    minViewMode: "years"
+});
+    $(document).ready( function(){
+      $.ajax({
+          type: "GET",
+          url: "/getdept",
+        
+          success(response) {
+            $("#myDropdown").empty();
+            $("#myDropdown").append(`<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">`)
+            $.each(response, function (key, value) { 
+                           
+                                  
+                                                $("#myDropdown").append(` 
+                           
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"  ><span id="course"  >${value["dept"]}</span></a>`);
+                            $("#setcourse").val(value["dept"])
+                            $("#deptcourses").text(`Department of ${value["dept"]} Courses`)
+                                              });
+                                           
+      
+                            
+          },
+      }); 
+        $.ajax({
+      type: "GET",
+      url: "/getclass",
+    
+      success(response) {
+        $.each(response, function (key, value) { 
+                       
+                      		
+ $("#class").append(`<option>${value['class']}</option>`);
+                                          });
+  
+                        
+      },
+  }); 
+ function  getdata(offset=0){
+      $.ajax({
+      type: "POST",
+      url: "/filterdata",
+     data:{dept:$("#setcourse").val(),session:$("#datepicker").val(),offset:offset},
+      success(response) {
+    
+         var c=1;
+        var i=0;
+        $("#tbody").empty()
+        $("#pages").empty();
+            $("#pages").append(  ` <li class="page-item"><a  class="page-link"><i class="icon-arrow-left"></i></a></li>`)
+        $.each(response, function (key, value) { 
+          i=i+1;
+             
+              if(i%4==0){
+                if(c>0){
+                $("#pages").append(  `<li class="page-item " id="currentpage" ><a href="# id="page" class="page-link">${c}</a></li>`)
+                c=c+1;
+              
+                }
+              }                   
+				
+							$("#tbody").append(`<tr id="name${i}"><td style="font-size:20pt;" id="stud">${value["stud_name"]} <a href="#" id="expand"><i class="icon-book-open"></i><i hidden>serial${i}</i></a>
+                                <a href="/printpreview/:${value["stud_name"]}" id="print"><i class="icon-printer"></i></a></td></tr>`);
+                          });
+                          $("#pages").append(  ` <li class="page-item"><a  class="page-link"><i class="icon-arrow-right"></i></a></li>`)
+      },
+  }) 
+    }  
+$(document).on("change","#datepicker",function(){
+ 
+  getdata()
+})
+$(document).on("click","#currentpage",function(){
+      getdata(offset=parseInt($(this).text())*parseInt($(this).text()));
+
+     
+    })
+$(document).on("change","#setcourse",function(){
+ 
+ getdata()
+})
+  $.ajax({
+      type: "POST",
+      url: "/getstudents",
+      data:{dept:$("#setcourse").val(),session:$("#datepicker").val(),offset:0}, 
+      success(response) {
+    
+    var c=1;
+   var i=0;
+   $("#tbody").empty()
+   $("#pages").empty();
+       $("#pages").append(  ` <li class="page-item"><a  class="page-link"><i class="icon-arrow-left"></i></a></li>`)
+   $.each(response, function (key, value) { 
+     i=i+1;
+        
+         if(i%4==0){
+           if(c>0){
+           $("#pages").append(  `<li class="page-item " id="currentpage" ><a href="# id="page" class="page-link">${c}</a></li>`)
+           c=c+1;
+         
+           }
+         }                   
+   
+         $("#tbody").append(`<tr id="name${i}"><td style="font-size:20pt;" id="stud">${value["stud_name"]} <a href="#" id="expand"><i class="icon-book-open"></i><i hidden>serial${i}</i></a>
+                           <a href="/transpreview/:${value["stud_name"]}" id="print"><i class="icon-printer"></i></a></td></tr>`);
+                     });
+                     $("#pages").append(  ` <li class="page-item"><a  class="page-link"><i class="icon-arrow-right"></i></a></li>`)
+ },
+}) 
+$(document).on("click","#expand", function(){
+  
+    var t=$(this).closest('tr').find('#stud').text()
+
+  $.ajax({
+      type: "POST",
+      url: "/name",
+     data:{stud:t.substring(0,t.lastIndexOf("serial")-1).trim()},
+      success(response) {
+     
+        var examsum=0;
+        var catsum=0;  
+        var total=0;
+        var unitsum=0;
+        var credit_units=0;
+        var cpga=0;
+        $.each(response,  function (key, value) { 
+            examsum=examsum+parseInt(value["exam"])             
+            catsum=catsum+parseInt(value["cat"])
+            total=examsum+catsum;
+            credit_units=credit_units+parseInt(value["credit_unit"])
+            unitsum=unitsum+(parseInt(value["units"])*parseInt(value["credit_unit"]))
+         cpga=unitsum/credit_units;
+           $('#name'+t.substring(t.lastIndexOf("serial")+6).trim()).append(`<td >${value["course_code"]} <br>${value["grade"]} </td>`);
+         
+                          });
+                          $('#name'+t.substring(t.lastIndexOf("serial")+6).trim()).append(`<td ><b>Total </br>${total}<b><br>CPGA </br>${cpga.toFixed(2)}  </td>`);
+                     
+      },
+  })
+})
+$(document).on("click","#print", function(){
+    var t=$(this).closest('tr').find('#stud').text()
+
+  $.ajax({
+      type: "POST",
+      url: "/printpreview",
+     data:{studs:t.substring(0,t.lastIndexOf("serial")-1).trim()},
+      success(response) {
+      
+        location.href="/printpreview"
+                     
+      },
+  })
+})
+    })
+</script>
+  </body>
+</html>

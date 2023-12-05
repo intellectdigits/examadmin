@@ -1,503 +1,346 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <title>Exam Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="./vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="./vendors/chartist/chartist.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="./images/favicon.png" />
+  </head>
+  <body>
+    <% if(typeof admin!= 'undefined' && admin!='') {
+      %>
+    <div id="admin" hidden><%=admin%></div>
+    <%}%>
+    <% if(typeof admin!= 'undefined' && admin!='') {
+      %>
+      <div id="results" hidden><%=exam%></div>
+    <%}%>
+    <% if(typeof admin!= 'undefined' && admin!='') {
+      %>
+      <div id="stud" hidden><%=stud%></div>
+    <%}%>
+     
+               
 
-    <!-- Title Page-->
-    <title>Dashboard</title>
+              
 
-    <!-- Fontfaces CSS-->
-    <link href="/css/font-face.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-
-    <!-- Bootstrap CSS-->
-    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-
-    <!-- Vendor CSS-->
-    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="/css/theme.css" rel="stylesheet" media="all">
-
-</head>
-
-<body class="animsition">
-    <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <%- include("./partials/nav.ejs") %>
-
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <%- include("./partials/head.ejs") %>
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                               
-                            </div>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+ 
+      <%-include("./partials/navbar.ejs") %>
+   
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+       
+        <%-include("./partials/AdminSidebar.ejs") %>
+       
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+         
+             <!-- Quick Action Toolbar Starts-->
+            <br>
+                          <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By Department</button>
+                          <div class="dropdown-menu" id="myDropdown">
+                          <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                            <a class="dropdown-item" href="#" ><span  id="course" > Action1</span></a>
+                            <a class="dropdown-item" href="#"  ><span id="course"  > Action2</span></a>
+                            <a class="dropdown-item" href="#"  ><span id="course"  > Action3</span></a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"  ><span id="course"  > Action4</span></a>
+                          </div>
                         </div>
-                        <div class="row">
-                           <br/>
-                           <h2 class="title-1 m-b-25"></h2>
-                           <div class="table table-bordered p-0">
-                               
-                               <table border="1" class="table ">
-                                   <thead class="thead-dark">
-                                       <tr>
-                                                <th>Level/Class</th>
-                                                <th>Subject/Course Code</th>
-                                                <th>Subject/Course Title</th>
-                                                <th>Course Lecturer</th>
-                                                <th class="text-right">Credit Unit</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% if(typeof model!= 'undefined') {
-                                                %>
-                                                <% for (const cat of model) { %>
-                                                   <tr> <td>
-                                                    <div id="uuid" hidden><%= cat.id%></div>
-                                                      <input id="level" class="au-input au-input--full" value="  <%= cat.level %>" type="text" name="username" placeholder="Level">  
-                                         
-                                                   </td> <td>
-                                                    
-                                           
-                                                    <input id="course_code" class="au-input au-input--full" value="  <%= cat.course_code %>" type="text" name="username" placeholder="Level">  
-                                                 
-                                                 </td> <td>
-                                                   
-                                                    <input id="course_title" class="au-input au-input--full" value=" <%= cat.course_title%>" type="text" name="username" placeholder="Level">  
-                                               
-                                                 </td> <td>
-                                                    
-                                                    <input id="lecturer" class="au-input au-input--full" value="<%= cat.lecturer %>" type="text" name="username" placeholder="Level">  
-                                                    
-                                                 </td> <td>
-                                                    
-                                                    <input id="unit" class="au-input au-input--full" value="<%= cat.unit %>" type="text" name="username" placeholder="Level">  
-                                                       
-                                                 </td><td><button id="save"><i class="far fa-check-square" ></i>Save Changes</button>
-                                                    <button type="button" id="delete" class="btn btn-danger">Delete</button></td></tr></tr>
-                                                  <% } %>
-                                                
-                                                <%}%>
-                                 
-                                        </tbody>
-                                    </table>
-                                    <h3>Add Course</h3><br>
-                                    <div class="row">
-                           
-                                        <div class="col-lg-6"><input id="levels" class="au-input au-input--full" type="text" name="username" placeholder="Academic Class/Level"></div>
-                                        <div class="col-lg-6"><input id="course_codes" class="au-input au-input--full" type="text" name="username" placeholder="Subject/Course Code"></div>
-                                        <div class="col-lg-6"><input id="course_titles" class="au-input au-input--full" type="text" name="username" placeholder="Course Title"></div>
-                                        <div class="col-lg-6"><input id="lecturers" class="au-input au-input--full" type="text" name="username" placeholder="Teacher/Lecturer"></div>
-                                        <div class="col-lg-6"><input id="units" class="au-input au-input--full" type="number" name="username" placeholder="Credit Unit"></div>
-                                      </div>
-                                      <br/><button id="addcat" class="au-btn au-btn--block au-btn--green m-b-20" type="button">Add Course</button>
-                            
-                                </div>
-                           
-                            
-                            </div>
-                          
-                        </div>
-                      
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="au-card recent-report">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2">recent reports</h3>
-                                        <div class="chart-info">
-                                            <div class="chart-info__left">
-                                                <div class="chart-note">
-                                                    <span class="dot dot--blue"></span>
-                                                    <span>Success</span>
-                                                </div>
-                                                <div class="chart-note mr-0">
-                                                    <span class="dot dot--green"></span>
-                                                    <span>Failures</span>
-                                                </div>
-                                            </div>
-                                            <div class="chart-info__right">
-                                                <div class="chart-statis">
-                                                    <span class="index incre">
-                                                        <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
-                                                    <span class="label">Success</span>
-                                                </div>
-                                                <div class="chart-statis mr-0">
-                                                    <span class="index decre">
-                                                        <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
-                                                    <span class="label">Failures</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="recent-report__chart">
-                                            <canvas id="recent-rep-chart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="au-card chart-percent-card">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 tm-b-5">char by %</h3>
-                                        <div class="row no-gutters">
-                                            <div class="col-xl-6">
-                                                <div class="chart-note-wrap">
-                                                    <div class="chart-note mr-0 d-block">
-                                                        <span class="dot dot--blue"></span>
-                                                        <span>Success</span>
-                                                    </div>
-                                                    <div class="chart-note mr-0 d-block">
-                                                        <span class="dot dot--red"></span>
-                                                        <span>Failures</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="percent-chart">
-                                                    <canvas id="percent-chart"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-                                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
-                                        <div class="bg-overlay bg-overlay--blue"></div>
-                                        <h3>
-                                            <i class="zmdi zmdi-account-calendar"></i>26 April, 2018</h3>
-                                        <button class="au-btn-plus">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="au-task js-list-load">
-                                        <div class="au-task__title">
-                                            <p>Tasks for John Doe</p>
-                                        </div>
-                                        <div class="au-task-list js-scrollbar3">
-                                            <div class="au-task__item au-task__item--danger">
-                                                <div class="au-task__item-inner">
-                                                    <h5 class="task">
-                                                        <a href="#">Meeting about plan for Admin Template 2018</a>
-                                                    </h5>
-                                                    <span class="time">10:00 AM</span>
-                                                </div>
-                                            </div>
-                                            <div class="au-task__item au-task__item--warning">
-                                                <div class="au-task__item-inner">
-                                                    <h5 class="task">
-                                                        <a href="#">Create new task for Dashboard</a>
-                                                    </h5>
-                                                    <span class="time">11:00 AM</span>
-                                                </div>
-                                            </div>
-                                            <div class="au-task__item au-task__item--primary">
-                                                <div class="au-task__item-inner">
-                                                    <h5 class="task">
-                                                        <a href="#">Meeting about plan for Admin Template 2018</a>
-                                                    </h5>
-                                                    <span class="time">02:00 PM</span>
-                                                </div>
-                                            </div>
-                                            <div class="au-task__item au-task__item--success">
-                                                <div class="au-task__item-inner">
-                                                    <h5 class="task">
-                                                        <a href="#">Create new task for Dashboard</a>
-                                                    </h5>
-                                                    <span class="time">03:30 PM</span>
-                                                </div>
-                                            </div>
-                                            <div class="au-task__item au-task__item--danger js-load-item">
-                                                <div class="au-task__item-inner">
-                                                    <h5 class="task">
-                                                        <a href="#">Meeting about plan for Admin Template 2018</a>
-                                                    </h5>
-                                                    <span class="time">10:00 AM</span>
-                                                </div>
-                                            </div>
-                                            <div class="au-task__item au-task__item--warning js-load-item">
-                                                <div class="au-task__item-inner">
-                                                    <h5 class="task">
-                                                        <a href="#">Create new task for Dashboard</a>
-                                                    </h5>
-                                                    <span class="time">11:00 AM</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="au-task__footer">
-                                            <button class="au-btn au-btn-load js-load-btn">load more</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-                                    <div class="au-card-title" style="background-image:url('images/bg-title-02.jpg');">
-                                        <div class="bg-overlay bg-overlay--blue"></div>
-                                        <h3>
-                                            <i class="zmdi zmdi-comment-text"></i>New Messages</h3>
-                                        <button class="au-btn-plus">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="au-inbox-wrap js-inbox-wrap">
-                                        <div class="au-message js-list-load">
-                                            <div class="au-message__noti">
-                                                <p>You Have
-                                                    <span>2</span>
-
-                                                    new messages
-                                                </p>
-                                            </div>
-                                            <div class="au-message-list">
-                                                <div class="au-message__item unread">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
-                                                                <div class="avatar">
-                                                                    <img src="/images/icon/avatar-02.jpg" alt="John Smith">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">John Smith</h5>
-                                                                <p>Have sent a photo</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>12 Min ago</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item unread">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap online">
-                                                                <div class="avatar">
-                                                                    <img src="/images/icon/avatar-03.jpg" alt="Nicholas Martinez">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Nicholas Martinez</h5>
-                                                                <p>You are now connected on message</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>11:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap online">
-                                                                <div class="avatar">
-                                                                    <img src="/images/icon/avatar-04.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Lorem ipsum dolor sit amet</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Yesterday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
-                                                                <div class="avatar">
-                                                                    <img src="/images/icon/avatar-05.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Purus feugiat finibus</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Sunday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item js-load-item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap online">
-                                                                <div class="avatar">
-                                                                    <img src="/images/icon/avatar-04.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Lorem ipsum dolor sit amet</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Yesterday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item js-load-item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
-                                                                <div class="avatar">
-                                                                    <img src="/images/icon/avatar-05.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Purus feugiat finibus</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Sunday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="au-message__footer">
-                                                <button class="au-btn au-btn-load js-load-btn">load more</button>
-                                            </div>
-                                        </div>
-                                        <div class="au-chat">
-                                            <div class="au-chat__title">
-                                                <div class="au-chat-info">
-                                                    <div class="avatar-wrap online">
-                                                        <div class="avatar avatar--small">
-                                                            <img src="/images/icon/avatar-02.jpg" alt="John Smith">
-                                                        </div>
-                                                    </div>
-                                                    <span class="nick">
-                                                        <a href="#">John Smith</a>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="au-chat__content">
-                                                <div class="recei-mess-wrap">
-                                                    <span class="mess-time">12 Min ago</span>
-                                                    <div class="recei-mess__inner">
-                                                        <div class="avatar avatar--tiny">
-                                                            <img src="/images/icon/avatar-02.jpg" alt="John Smith">
-                                                        </div>
-                                                        <div class="recei-mess-list">
-                                                            <div class="recei-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
-                                                            <div class="recei-mess">Donec tempor, sapien ac viverra</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="send-mess-wrap">
-                                                    <span class="mess-time">30 Sec ago</span>
-                                                    <div class="send-mess__inner">
-                                                        <div class="send-mess-list">
-                                                            <div class="send-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="au-chat-textfield">
-                                                <form class="au-form-icon">
-                                                    <input class="au-input au-input--full au-input--h65" type="text" placeholder="Type a message">
-                                                    <button class="au-input-icon">
-                                                        <i class="zmdi zmdi-camera"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                         <!--footer-->
-                         <%- include("./partials/footer.ejs") %>
+                        <input type="text" id="setcourse" class="form-control" aria-label="Text input with dropdown button">
+                      </div>
                     </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
+                    <br>
+                   
+                                                  <script>function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+const colorSelectors = document.querySelector("#myDropdown");
+
+/* define event listeners */
+const loadEventListeners = () => {
+
+    colorSelectors.addEventListener("click", (e) => {
+        e.preventDefault();
+    
+        $("#setcourse").val(e.target.innerText)
+            $("#deptcourses").text(`Department of ${e.target.innerText} Courses`)
+    });
+}
+
+/* Load all event listeners */
+loadEventListeners();
+</script>
+             <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title" id="deptcourses">Course Management</h4>
+                  
+                    </p>
+                    <table border="1" class="table ">
+                      <thead class="thead-dark">
+                          <tr>
+                                   <th>Academic Level</th>
+                                   <th>Course Code</th>
+                                   <th>Course Title</th>
+                                   <th>Course Lecturer</th>
+                                   <th class="text-right">Credit Unit</th>
+                                   <th>Actions</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <% if(typeof model!= 'undefined') {
+                                   %>
+                                   <% for (const cat of model) { %>
+                                      <tr> <td>
+                                       <div id="uuid" hidden><%= cat.id%></div>
+                                         <input id="level" class="form-control" value="  <%= cat.level %>" type="text" name="username" placeholder="Level">  
+                            
+                                      </td> <td>
+                                       
+                              
+                                       <input id="course_code" class="form-control" value="  <%= cat.course_code %>" type="text" name="username" placeholder="Level">  
+                                    
+                                    </td> <td>
+                                      
+                                       <input id="course_title" class="form-control" value=" <%= cat.course_title%>" type="text" name="username" placeholder="Level">  
+                                  
+                                    </td> <td>
+                                       
+                                       <input id="lecturer" class="form-control" value="<%= cat.lecturer %>" type="text" name="username" placeholder="Level">  
+                                       
+                                    </td> <td>
+                                       
+                                       <input id="unit" class="form-control" value="<%= cat.unit %>" type="text" name="username" placeholder="Level">  
+                                          
+                                    </td><td><button id="save" type="button"  class="btn btn-inverse-dark btn-icon"><i class="icon-pencil"></i></button>
+	
+                                      <button type="button" id="delete"class="btn btn-inverse-dark btn-icon">
+                                      <i class="icon-trash"></i></td></tr></tr>
+                                     <% } %>
+                                   
+                                   <%}%>
+                    
+                           </tbody>
+                       </table>
+                       <div class="d-flex mt-4 flex-wrap"  id="pagination">
+              
+                        <nav class="ml-auto" id="cc">
+                          <ul class="pagination separated pagination-info" id="pages">
+                            <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
+                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
+                          </ul>
+                        </nav>
+                      </div>
+                       <h3>Add Course</h3><br>
+                       <div class="row">
+              
+                        <div class="col-lg-6"> <select id="levels"class="form-control"> <option>Select Academic Level</option> <option>100</option> <option>200</option>
+                        </option> <option>300</option></option> <option>400</option><option>500</option><option>600</option></select></div> 
+                         <div class="col-lg-6"> <div class="form-group"><input id="course_codes" class="form-control" type="text" name="username" placeholder="Course Code"></div></div>
+                           <div class="col-lg-6"><div class="form-group"><input id="course_titles" class="form-control" type="text" name="username" placeholder="Course Title"></div></div>
+                           <div class="col-lg-6"><div class="form-group"><input id="lecturers" class="form-control" type="text" name="username" placeholder="course Lecturer"></div></div>
+                           <div class="col-lg-6"><div class="form-group"><input id="units" class="form-control" type="number" name="username" placeholder="Credit Unit"></div></div>
+                         </div>
+                         <br/>  <button type="button" id="addcat"class="btn btn-inverse-dark btn-icon">Save</button>
+               
+                   </div>
+              
+               
+               </div>
+             
+           </div>
+
+       
+           
+           
+        
         </div>
-
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
     </div>
-
-    <!-- Jquery JS-->
-    <script src="/vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="/vendor/slick/slick.min.js">
-    </script>
-    <script src="/vendor/wow/wow.min.js"></script>
-    <script src="/vendor/animsition/animsition.min.js"></script>
-    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="/vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js">
-    </script>
-
-    <!-- Main JS-->
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="./vendors/chart.js/Chart.min.js"></script>
+    <script src="./vendors/moment/moment.min.js"></script>
+    <script src="./vendors/daterangepicker/daterangepicker.js"></script>
+    <script src="./vendors/chartist/chartist.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="./js/dashboard.js"></script>
+    <!-- End custom js for this page -->
+    <!-- jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
     <script src="/js/main.js"></script>
    
 <script>
     $(document).ready(function(){
+      if($("#user").text()==''){location.href="/login"}
+            
+      $.ajax({
+          type: "GET",
+          url: "/getdept",
+        
+          success(response) {
+            $("#myDropdown").empty();
+            $("#myDropdown").append(`<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">`)
+            $.each(response, function (key, value) { 
+                           
+                                  
+                                                $("#myDropdown").append(` 
+                           
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"  ><span id="course"  >${value["dept"]}</span></a>`);
+                            $("#setcourse").val(value["dept"])
+                            $("#deptcourses").text(`Department of ${value["dept"]} Courses`)
+                                              });
+                                           
+      
+                            
+          },
+      }); 
+    
+      function getdata(){
+        let dept=$("#setcourse").val().trim()
+            $.ajax({
+          type: "POST",
+          url: "/getcourses",
+        data:{dept:dept},
+          success(response) {
+            
+          
+         
+            $("tbody").empty();
+            $.each(response, function (key, value) { 
+            
+     $("tbody").append(` <tr style="background-color:white;">
+                                                            <td class="rows" > <div id="uuid" hidden>${value["id"]}</div>
+                                                                ${value["level"]}</td>
+                                                                    <td class="rows" >
+                                                        
+                                                                      ${value["course_code"]}
+                                                                       
+                                                                     </td><td>
+                                                                        
+                                                                      ${value["course_title"]}
+                                                                     
+                                                                     </td><td>
+                                                                       
+                                                                       ${value["lecturer"]}   
+                                                                         
+                                                                     </td> </td> <td>
+                                                                        
+                                                                      ${value["unit"]} 
+                                                                     
+                                                                   
+                                                                      <td><button id="save" type="button"  class="btn btn-inverse-dark"><i class="icon-pencil">Save</i></button>
+	
+  <button type="button" id="delete"class="btn btn-inverse-dark ">
+	<i class="icon-trash">Delete</i></td>
+                                                            
+                                                        </tr>`);
+                                              });
+      
+                            
+          },
+      }); 
+
+        }
        
+      $(document).on("click","#myDropdown",function(){
+  
+     getdata();
+     
+    })     
         $(document).on("click","#delete",function(){
-            alert("gfgf")
+       
             let id=$(this).closest('tr').find('#uuid').text();
             $.ajax({
       type: "POST",
       url: "/delcourse",
       data:{id:id},
       success(data) {
-      alert("deleted")
+
        location.reload();
      
                         
       },
   });  
-        });  
+        }); 
+        $(document).on("change","#class",function(){
+  getdata();
+  
+ })
+        $.ajax({
+      type: "GET",
+      url: "/getclass",
+    
+      success(response) {
+        $.each(response, function (key, value) { 
+                       
+                      		
+                                            $("#class").append(`<option>${value['class']}</option>`);
+                                          });
+  
+                        
+      },
+  });  
         $(document).on("click","#save",function(){
       
      
        let id=$(this).closest('tr').find('#uuid').text();
-        let level=$(this).closest('tr').find('#level').val();
-        let course_code=$(this).closest('tr').find('#course_code').val();
-        let course_title=$(this).closest('tr').find('#course_title').val();
-        let lecturer=$(this).closest('tr').find('#lecturer').val();
-        let unit=$(this).closest('tr').find('#unit').val();
+        let level=$(this).closest('tr').find('#level').val().trim();
+        let course_code=$(this).closest('tr').find('#course_code').val().trim();
+        let course_title=$(this).closest('tr').find('#course_title').val().trim();
+        let lecturer=$(this).closest('tr').find('#lecturer').val().trim();
+        let unit=$(this).closest('tr').find('#unit').val().trim();
        
         if(level!='' &&course_code!=''){
            
@@ -514,20 +357,21 @@
   });}else{alert("enter value in all fields")}
       })
       $("#addcat").click(function(){
-        let level=$("#levels").val();
-        let course_code=$("#course_codes").val();
-        let course_title=$("#course_titles").val();
+        let level= $('#levels').find(":selected").text();
+        let course_code=$("#course_codes").val().trim();
+        let course_title=$("#course_titles").val().trim();
         let lecturer=$("#lecturers").val();
         let unit=$("#units").val();
-        if(level!='' &&course_code!=''&&course_title!=''&& lecturer!=''&& unit!=''){
+        let dept=$("#setcourse").val();
+        if(level!='' &&course_code!=''&&course_title!=''&& lecturer!=''&& unit!=''&&level!=='Select Academic Level'){
            
         $.ajax({
       type: "POST",
       url: "/addcourse",
-      data:{level:level,course_code:course_code,course_title:course_title, lecturer:lecturer,unit:unit,school:localStorage.getItem("school")},
+      data:{level:level,course_code:course_code,course_title:course_title, lecturer:lecturer,unit:unit,dept:dept},
       success(data) {
       
-       location.reload();
+  getdata();
      
                         
       },
@@ -536,7 +380,5 @@
      
     })
 </script>
-</body>
-
+  </body>
 </html>
-<!-- end document-->

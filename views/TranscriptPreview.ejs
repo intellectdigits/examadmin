@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Exam Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="/vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/vendors/chartist/chartist.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="/images/favicon.png" />
+  </head>
+  <body>
+
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+	 
+  
+   
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+       
+
+       
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+         
+             <!-- Quick Action Toolbar Starts-->
+			<center> <h1 id="schoolname">Cross River University</h1>  <img src="/uploads/logo.jpg" width="8%"/>
+				<h3 id="contact">Ekpo Abasi Street, calabar, Cross River State</h3><br>
+			
+			    <table class="table table-bordered"><tr><td><b>Student Name </td><td id="name">  <%=name %></td>  <td><b>Metric No: </td><td>  <%=reg_no %></td></tr>
+				<tr><td><b>Dpartment: </td><td> <%=dept %></td> <td><b>Faculty: </td><td>  <%=dept %></td></tr></table> </center>                            
+             <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Transcript Records</h4>
+                  
+                    </p>
+                    <div class="table-responsive border rounded p-1">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                      
+                          
+                          <th> <b>Course Code </th>
+                        
+                          <th><b>Continous assesment </th>
+                          <th><b>Exam Score </th>
+						  <th><b>Grade</th>
+                <th><b>Examiination Year</th>
+                  <th><b>Academic Level</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if(typeof model!= 'undefined') {
+                            %>
+                            <% for (const cat of model) { %>
+                        <tr>
+                          <td><%=  cat.course_code %></td><div id="uuid" hidden><%= cat.id%></div>
+                         
+                          <td>
+                            <%= cat.cat %>                         
+                          </td>
+                          <td><%= cat.exam %> </td>
+                          <td><%= cat.grade %>  
+</td>
+<td><%= cat.year %>  </td>
+<td><%= cat.level %> </td>
+                        </tr>
+                        <tr>
+                            <% } %>
+                                                
+                            <%}%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                </div>
+              </div>
+       
+            
+            <!-- Quick Action Toolbar Ends-->
+			<div class="row">
+				<div class="col-md-4 grid-margin stretch-card">
+				  <div class="card">
+					<div class="card-body">
+					  <h4 class="card-title">CPGA</h4>
+					  <div class="aligner-wrapper">
+						<canvas id="myCharts" style="width:100%;max-width:600px"></canvas>
+						<div class="wrapper d-flex flex-column justify-content-center absolute absolute-center">
+						  <h1 class="text-center mb-0 font-weight-bold"><%=cpga%></h1>
+						
+						</div>
+					  </div>
+					 
+					</div>
+				  </div>
+				</div>
+				<div class="col-md-8 grid-margin stretch-card">
+				  <div class="card">
+					<div class="card-body performane-indicator-card">
+					  <div class="d-sm-flex">
+						<h4 class="card-title flex-shrink-1">Performance Indicator</h4>
+						<p class="m-sm-0 ml-sm-auto flex-shrink-0">
+						 
+						</p>
+					  </div>
+					  <div class="d-sm-flex flex-wrap">
+						<div class="d-flex align-items-center">
+						  <span class="dot-indicator bg-primary ml-2"></span>
+						  <p class="mb-0 ml-2 text-muted font-weight-semibold">Relative Grade Chart</p>
+						</div>
+						<div class="d-flex align-items-center">
+						  <span class="dot-indicator bg-info ml-2"></span>
+						  <p class="mb-0 ml-2 text-muted font-weight-semibold">Grade Frequency</p>
+						</div>
+					
+					  </div>
+					  <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+					</div>
+				  </div>
+				</div>
+			  </div>
+           
+           
+          </div>
+          <!-- content-wrapper ends -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- main-panel ends -->
+      </div>
+        <!-- BAR CHAR values -->
+        <div id="A" hidden></div><div id="B"></div><div id="C" hidden></div><div id="D" hidden></div><div id="E" hidden></div>
+    </div>
+   
+    <script src="/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="/vendors/chart.js/Chart.min.js"></script>
+    <script src="/vendors/moment/moment.min.js"></script>
+    <script src="/vendors/daterangepicker/daterangepicker.js"></script>
+    <script src="/vendors/chartist/chartist.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+	<script src="js/misc.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="/js/dashboard.js"></script>
+    <!-- End custom js for this page -->
+    <!-- jquery JS-->
+	<script src="/vendor/jquery-3.2.1.min.js"></script>
+	<script>
+     
+		</script>
+	
+    <script>
+        $(document).ready(function(){
+
+     var val=""
+    $.ajax({
+          type: "POST",
+          url: "/name",
+       data:{stud:$("#name").text().trim()},
+          success(response) {
+var x=0;
+var B=0;
+var A=0;
+var C=0;
+var D=0;
+var E=0;
+            $.each(response, function (key, value) {
+x=x+1;
+if(value["grade"]=="B"){
+B=B+1;
+}
+if(value["grade"]=="A"){
+A=A+1;
+}
+if(value["grade"]=="C"){
+C=C+1;
+}
+if(value["grade"]=="D"){
+D=D+1;
+}
+if(value["grade"]=="E"){
+E=E+1;
+}
+             })
+          $("#A").text(A/x* 100);   
+          $("#B").text(B/x* 100);  
+          $("#C").text(C/x* 100);   
+          $("#D").text(D/x* 100);  
+          $("#E").text(E/x * 100);
+          let xValues = ["A", "B", "C", "D", "E"];
+
+		const yValues = [parseInt($("#A").text()), parseInt($("#B").text()), $("#C").text(), $("#D").text(), $("#E").text()];
+    const barColors = ["red", "green","blue","orange","brown"];
+    new Chart("myChart", {
+		  type: "bar",
+		  data: {
+			labels: xValues,
+			datasets: [{
+			  backgroundColor: barColors,
+			  data: yValues
+			}]
+		  },
+		  options: {
+			legend: {display: false},
+			title: {
+			  display: true,
+			  text: ""
+			}
+		  }
+		});
+          },
+      });
+ 
+	
+   
+          if($("#admin").text()=='checked'){
+           location.href="/users"
+          }
+          if($("#results").text()=='checked'){
+           
+          }
+          if($("#stud").text()=='checked'){
+            location.href="/stud"
+          }
+  
+            
+        $.ajax({
+          type: "GET",
+          url: "/getprofile",
+       
+          success(response) {
+          
+         
+            $("#schoolname").empty();
+            $("#contact").empty();
+            $.each(response, function (key, value) { 
+             
+              $("#schoolname").append(`${value["Institute_name"]} `);
+              $("#contact").append(`${value["address"]}   <i class="icon-phone"></i> ${value["phone"]} <i class="icon-envelope-open"></i>${value["email"]}  `);
+                                              });
+      
+                            
+          },
+      }); 
+      
+        })
+    </script>
+  </body>
+</html>
