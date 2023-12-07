@@ -54,11 +54,93 @@
         <div class="main-panel">
           <div class="content-wrapper">
          <br>
-
+ <!-- Quick Action Toolbar Starts-->
+ <div class="row quick-action-toolbar">
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-header d-block d-md-flex">
+          <h5 class="mb-0">Quick Actions</h5>
+          <p class="ml-auto mb-0"><i class="icon-bulb"></i></p>
+        </div>
+        <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
+          <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+            <button type="button" class="btn px-0"> <i class="icon-user mr-2"></i><a href="/students">Add Student</a> </button>
+          </div>
+          <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+            <button type="button" class="btn px-0"><i class="icon-docs mr-2"></i><a href="/transcript"> print Transcript</a></button>
+          </div>
+          <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+            <button type="button" class="btn px-0"><i class="icon-note mr-2"></i><a href="/cat"> Record Exams</a></button>
+          </div>
+          <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+            <button type="button" class="btn px-0"><i class=" icon-chemistry mr-2"></i><a href="/course"> Register Course</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Quick Action Toolbar Ends-->
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-sm-flex align-items-baseline report-summary-header">
+                <h5 class="font-weight-semibold">Report Summary</h5> <span class="ml-auto">Updated Report</span> <button class="btn btn-icons border-0 p-2"><i class="icon-refresh"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="row report-inner-cards-wrapper">
+            <div class=" col-md -6 col-xl report-inner-card">
+              <div class="inner-card-text">
+                <span class="report-title">REGISTERED STUDENTS</span>
+                <h4 id="studs">123</h4>
+               
+              </div>
+              <div class="inner-card-icon bg-success">
+                <i class="icon-people"></i>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl report-inner-card">
+              <div class="inner-card-text">
+                <span class="report-title">REGISTERED COURSES</span>
+                <h4>222</h4>
+                <span class="report-count"> aLL Reports</span>
+              </div>
+              <div class="inner-card-icon bg-danger">
+                <i class=" icon-chemistry"></i>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl report-inner-card">
+              <div class="inner-card-text">
+                <span class="report-title">Departments</span>
+                <h4 id="depts">2650</h4>
+                <span class="report-count">aLL RECORDS</span>
+              </div>
+              <div class="inner-card-icon bg-warning">
+                <i class="icon-graduation"></i>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl report-inner-card">
+              <div class="inner-card-text">
+                <span class="report-title">TRANSCRIPT</span>
+                <h4>25</h4>
+               
+              </div>
+              <div class="inner-card-icon bg-primary">
+                <i class=" icon-docs"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
               <div class="row">
                
-                <div class="col-lg-6">  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Department</label>  <div class="form-group">
-                  <div class="input-group">
+                <div class="col-lg-6" hidden>  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Department</label>  <div class="form-group"></div>
+                  <div class="input-group" hidden>
                     <div class="input-group-prepend">
                       <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By Department</button>
                       <div class="dropdown-menu" id="myDropdown">
@@ -72,8 +154,8 @@
                     </div>
                     <input type="text" id="setcourse" class="form-control" aria-label="Text input with dropdown button">
                   </div>
-                </div></div>
-                <div class="col-lg-6">  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Academic Session</label>
+                </div>
+                <div class="col-lg-6" hidden>  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Academic Session</label>
                   <input type="text" id="datepicker"  class="form-control" /></p></div>
                   <script>function filterFunction() {
                     var input, filter, ul, li, a, i;
@@ -108,85 +190,83 @@
                   </script>
             </div>
             
-            <div class="row">
-              <br/>
-              <div ><h1 id="department">Department of Biology</h1></div>
-                   <h2 class="title-1 m-b-25"></h2>
-                   <div class="table table-bordered p-0">
-                       
-                       <table border="1" class="table ">
-                           <thead class="thead-dark">
-                               <tr>
-                                   <th>Student_Name</th>
-                                   <th>Registration Number</th>
-                                   <th>Current Academic Level</th>
-                                   <th>Actions</th>
-                                 
-                               </tr>
-                           </thead>
-                           <tbody id="tbody">
-                               <% if(typeof model!= 'undefined') {
-                                   %>
-                                   <% for (const cat of model) { %>
-                                      <tr> <td>
-                                       <div id="uuid" hidden><%= cat.id%></div>
-                                         <input id="level" class="form-control" value=" <%= cat.stud_name %>" type="text" name="username" placeholder="Level">  
-                                      </td> <td>
-                                       
-                                       <input id="reg_no" class="form-control" value="<%= cat.reg_no %>" type="text" name="username" placeholder="Level">  
-                                   
-                                    </td> <td>
-                                      
-                                       <input id="level" class="form-control" value=" <%= cat.level%>" type="text" name="username" placeholder=">Current Academic Level">  
-                                     
-                                    </td><td><button type="button" class="btn btn-success">Save Changes</button>
-                                      <button type="button" id="delete"class="btn btn-inverse-dark btn-icon">
-                                        <i class="icon-trash"></i></button></td> </tr>
-                                     <% } %>
-                                   
-                                   <%}%>
-                                  
-                           </tbody>
-                       </table>
-                       <div class="d-flex mt-4 flex-wrap"  id="pagination">
-                        <p class="text-muted" id="showing"></p>  
-                           <nav class="ml-auto" id="cc">
-                             <ul class="pagination separated pagination-info" id="pages">
-                               <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
-                               <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                               <li class="page-item"><a href="#" class="page-link">2</a></li>
-                               <li class="page-item"><a href="#" class="page-link">3</a></li>
-                               <li class="page-item"><a href="#" class="page-link">4</a></li>
-                               <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
-                             </ul>
-                           </nav>
-                         </div> 
-                       <h3> Add Student</h3>
-                       <div >
-                           <div class="col-lg-6"><input id="stud_name" class="form-control" type="text" name="username" placeholder="Student Name"></div>
-                           <div class="col-lg-6"><input id="reg_no" class="form-control" type="text" name="username" placeholder="Registration Number"></div>
-                           <div class="col-lg-6"><input id="level" class="form-control" type="text" name="username" placeholder="Level"></div>
-                                       
-                               </div>
-                         <br/><button id="addcat" type="button" ><i class="far fa-check-square" ></i>Save</button>
-               
-                   </div>
-              
-               
-               </div>
+    
              
-        
-               <div id="next" hidden>1</div>
 
             
             
-            
-        
+               <div id="A" hidden></div><div id="B"hidden></div><div id="C" hidden></div><div id="D" hidden></div><div id="E" hidden></div>   
+               <div class="row">
+				<div class="col-md-4 grid-margin stretch-card">
+				  <div class="card">
+					<div class="card-body">
+					  <h4 class="card-title">Sucess Vs Failure</h4>
+					  <div class="aligner-wrapper">
+						<canvas id="myCharts"  style="width:100%;max-width:600px">32</canvas>
+						<div class="wrapper d-flex flex-column justify-content-center absolute absolute-center">
+						  <h1 class="text-center mb-0 font-weight-bold" id="total"></h1>
+						
+						</div>
+					  </div>
+					 
+					</div>
+				  </div>
+				</div>
+				<div class="col-md-8 grid-margin stretch-card">
+				  <div class="card">
+					<div class="card-body performane-indicator-card">
+					  <div class="d-sm-flex">
+						<h4 class="card-title flex-shrink-1">Performance Indicator</h4>
+						<p class="m-sm-0 ml-sm-auto flex-shrink-0">
+						 
+						</p>
+					  </div>
+					  <div class="d-sm-flex flex-wrap">
+						<div class="d-flex align-items-center">
+						  <span class="dot-indicator bg-primary ml-2"></span>
+						  <p class="mb-0 ml-2 text-muted font-weight-semibold">Relative Grade Chart</p>
+						</div>
+						<div class="d-flex align-items-center">
+						  <span class="dot-indicator bg-info ml-2"></span>
+						  <p class="mb-0 ml-2 text-muted font-weight-semibold">Grade Frequency</p>
+						</div>
+					
+					  </div>
+					  <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+					</div>
+				  </div>
+				</div>
+			  </div>
+           
+           
+          </div>
+          <!-- content-wrapper ends -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
-    </div>
+        </div>
+        <!-- main-panel ends -->
+      </div>
+    
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
@@ -224,12 +304,14 @@
         $.ajax({
           type: "GET",
           url: "/getdept",
-        
+       
           success(response) {
             $("#myDropdown").empty();
             $("#myDropdown").append(`<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">`)
+            var i=0;
             $.each(response, function (key, value) { 
-                           
+                i=i+1;    
+                $("#depts").text(i)       
                                   
                                                 $("#myDropdown").append(` 
                            
@@ -259,7 +341,7 @@
        $("#pages").append(  ` <li class="page-item"><a  class="page-link"><i class="icon-arrow-left"></i></a></li>`)
    $.each(response, function (key, value) { 
      i=i+1;
-        
+     $("#studs").text(i)    
          if(i%4==0){
            if(c>0){
            $("#pages").append(  `<li class="page-item " id="currentpage" ><a href="# id="page" class="page-link">${c}</a></li>`)
@@ -287,74 +369,86 @@
  }
       }); 
       }
-          $(document).on("click","#delete",function(){
-           //   alert("gfgf")
-              let id=$(this).closest('tr').find('#uuid').text();
-              $.ajax({
-        type: "POST",
-        url: "/delstud",
-        data:{id:id},
-        success(data) {
-      
-         location.reload();
-       
-                          
-        },
-    });  
-          }); 
+        
   getstud()     
-  $(document).on("click","#currentpage",function(){
+  var val=""
+    $.ajax({
+          type: "POST",
+          url: "/gradechart",
+       data:{stud:$("#name").text().trim()},
+          success(response) {
+var x=0;
+var B=0;
+var A=0;
+var C=0;
+var D=0;
+var E=0;
+            $.each(response, function (key, value) {
+x=x+1;
+if(value["grade"]=="B"){
+B=B+1;
+}
+if(value["grade"]=="A"){
+A=A+1;
+}
+if(value["grade"]=="C"){
+C=C+1;
+}
+if(value["grade"]=="D"){
+D=D+1;
+}
+if(value["grade"]=="E"){
+E=E+1;
+}
+             })
+          $("#A").text(A/x* 100);   
+          $("#B").text(B/x* 100);  
+          $("#C").text(C/x* 100);   
+          $("#D").text(D/x* 100);  
+          $("#E").text(E/x * 100);
+          let xValues = ["A", "B", "C", "D", "E"];
+          let xValue = ["Sucess", "Failure"];
+        const yValues = [parseInt($("#A").text()), parseInt($("#B").text()), $("#C").text(), $("#D").text(), $("#E").text()];
+        const yValue = [100-parseInt($("#E").text()), $("#E").text()];
+    const barColors = ["red", "green","blue","orange","brown"];
+    const barColor = ["green", "red"];
+    new Chart("myChart", {
+		  type: "bar",
+		  data: {
+			labels: xValues,
+			datasets: [{
+			  backgroundColor: barColors,
+			  data: yValues
+			}]
+		  },
+		  options: {
+			legend: {display: false},
+			title: {
+			  display: true,
+			  text: ""
+			}
+		  }
+        });
+        new Chart("myCharts", {
+		  type: "pie",
+		  data: {
+			labels: xValue,
+			datasets: [{
+			  backgroundColor: barColor,
+			  data: yValue
+			}]
+		  },
+		  options: {
+			legend: {display: false},
+			title: {
+			  display: true,
+			  text: ""
+			}
+		  }
+		});
+          },
+      });
  
-      getstud(offset=parseInt($(this).text())*parseInt($(this).text()));
-
-     
-    })    
-$(document).on("change","#datepicker",function(){
- 
-$("#department").text(`Department of ${$("#setcourse").val()} ${$("#datepicker").val()} Session`)
-getstud() 
-})
-        $("#addcat").click(function(){
-          let level=$("#level").val();
-          let stud_name=$("#stud_name").val();
-          let dept=$("#setcourse").val();
-          let reg_no=$("#reg_no").val();
-          let session=$("#datepicker").val();
-          if(level!='' &&stud_name!=''&&dept!=''){
-            
-          $.ajax({
-        type: "POST",
-        url: '/addstudent',
-        data:{level:level,stud_name:stud_name,dept:dept,reg_no:reg_no,session:session},
-        success(data) {
-       
-         location.reload();
-       
-                          
-        },
-    });}else{alert("enter value in all fields")}
-        })
-        $(document).on("click","#save",function(){
-         
-         let id=$(this).closest('tr').find('#uuid').text();
-         let reg_no=$(this).closest('tr').find('#reg_no').val();
-         let level=$(this).closest('tr').find('#level').val();
-     
-         let stud_name=$(this).closest('tr').find('#stud_name').val().trim();
-         
-         if(stud_name!=''&&reg_no!=''&& level!=''){
-          
-         $.ajax({
-       type: "POST",
-       url: "/updatestud",
-       data:{id:id,reg_no:reg_no,level:level,stud_name:stud_name},
-       success(data) {
-     location.reload()
-  
-                         
-       },
-   });}else{alert("enter value in all fields")}
-       }) 
       })
   </script>
   </body>

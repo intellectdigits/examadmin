@@ -159,7 +159,7 @@ loadEventListeners();
                            </tbody>
                        </table>
                        <div class="d-flex mt-4 flex-wrap"  id="pagination">
-              
+                        <p class="text-muted" id="showing"></p>  
                         <nav class="ml-auto" id="cc">
                           <ul class="pagination separated pagination-info" id="pages">
                             <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
@@ -189,7 +189,7 @@ loadEventListeners();
                </div>
              
            </div>
-
+           <div id="next" hidden>1</div>
        
            
            
@@ -241,43 +241,54 @@ loadEventListeners();
                             $("#setcourse").val(value["dept"])
                             $("#deptcourses").text(`Department of ${value["dept"]} Courses`)
                                               });
-                                           
+                                              getdata()               
       
                             
           },
       }); 
-    
-      function getdata(){
+   
+      function getdata(offset=0){
         let dept=$("#setcourse").val().trim()
             $.ajax({
           type: "POST",
           url: "/getcourses",
-        data:{dept:dept},
+        data:{dept:dept,offset:offset},
           success(response) {
-            
-          
-         
+ 
+         var i=0;
+         var c=1;
             $("tbody").empty();
+            $("#pages").empty();
+            $("#pages").append(  ` <li class="page-item"  id="navback"><a  class="page-link"><i class="icon-arrow-left"></i></a></li>`)
             $.each(response, function (key, value) { 
+              i=i+1;
+             
+              if(i%4==0){
+                if(c>0){
+                $("#pages").append(  `<li class="page-item " id="currentpage" ><a href="# id="page" class="page-link">${c}</a></li>`)
+                c=c+1;
+              
+                }
+              }
             
      $("tbody").append(` <tr style="background-color:white;">
                                                             <td class="rows" > <div id="uuid" hidden>${value["id"]}</div>
-                                                                ${value["level"]}</td>
+                                                              <input id="level" class="form-control" value="${value["level"]}" type="text" name="username" placeholder="Level"></td>
                                                                     <td class="rows" >
                                                         
-                                                                      ${value["course_code"]}
+                                                                      <input id="course_code" class="form-control" value="${value["course_code"]}" type="text" name="username" placeholder="course code">
                                                                        
                                                                      </td><td>
                                                                         
-                                                                      ${value["course_title"]}
+                                                                      <input id="course_title" class="form-control" value="${value["course_title"]}" type="text" name="username" placeholder="course title">
                                                                      
                                                                      </td><td>
                                                                        
-                                                                       ${value["lecturer"]}   
+                                                                      <input id="lecturer" class="form-control" value="${value["lecturer"]}" type="text" name="username" placeholder="lecturer">
                                                                          
                                                                      </td> </td> <td>
                                                                         
-                                                                      ${value["unit"]} 
+                                                                      <input id="unit" class="form-control" value="${value["unit"]}" type="text" name="username" placeholder="credit unit">
                                                                      
                                                                    
                                                                       <td><button id="save" type="button"  class="btn btn-inverse-dark"><i class="icon-pencil">Save</i></button>
@@ -287,7 +298,7 @@ loadEventListeners();
                                                             
                                                         </tr>`);
                                               });
-      
+                                              $("#pages").append(  ` <li class="page-item"><a id="navfront" class="page-link"><i class="icon-arrow-right"></i></a></li>`)
                             
           },
       }); 
@@ -298,7 +309,36 @@ loadEventListeners();
   
      getdata();
      
-    })     
+    }) 
+    let startpage=parseInt($("#next").text())      
+        $(document).on("click","#navfront ",function(){
+         
+ 
+ 
+   startpage=startpage+1;
+     getdata(offset=startpage);
+     $("#next").text(startpage)
+     $("#showing").text(`showing page ${startpage}`)
+    })       
+    $(document).on("click","#navback ",function(){
+         
+ 
+ if(startpage>1){
+         startpage=startpage-1;
+           getdata(offset=startpage);
+           $("#next").text(startpage)
+           $("#showing").text(`showing page ${startpage}`)}
+          })         
+     $(document).on("click","#myDropdown",function(){
+     
+      getdata(offset=0);
+      
+     })
+     $(document).on("click","#currentpage",function(){
+      getdata(offset=parseInt($(this).text())*parseInt($(this).text()));
+      $("#showing").text(`showing page ${parseInt($(this).text())*parseInt($(this).text())}`)
+     
+    })   
         $(document).on("click","#delete",function(){
        
             let id=$(this).closest('tr').find('#uuid').text();
@@ -333,7 +373,7 @@ loadEventListeners();
       },
   });  
         $(document).on("click","#save",function(){
-      
+     
      
        let id=$(this).closest('tr').find('#uuid').text();
         let level=$(this).closest('tr').find('#level').val().trim();
@@ -343,13 +383,13 @@ loadEventListeners();
         let unit=$(this).closest('tr').find('#unit').val().trim();
        
         if(level!='' &&course_code!=''){
-           
+       
         $.ajax({
       type: "POST",
       url: "/updatecourse",
       data:{id:id,level:level,course_code:course_code,course_title:course_title, lecturer:lecturer,unit:unit,school:localStorage.getItem("orgnames")},
       success(data) {
-      
+        
        location.reload();
      
                         
