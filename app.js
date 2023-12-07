@@ -344,7 +344,7 @@ db.get(sql, [username,password], (err, row) => {
   req.session.level = row.level ;
   req.session.dept= row.dept ;
   req.session.session= row.session;
-  res.render("cat",{user:req.session.user,school:row.school,level:row.level,dept:row.dept,admin:row.result,exam:row.exams,stud:row.users,session:req.session.session})
+  res.render("welcome",{user:req.session.user,school:row.school,level:row.level,dept:row.dept,admin:row.result,exam:row.exams,stud:row.users,session:req.session.session})
 
 }
     else{
@@ -553,7 +553,7 @@ app.post('/getcourses', urlencodedParser, function (req, res) {
     }
     console.log('Connected to the in-memory SQlite database.');
    });
-   const sql = "SELECT * FROM courses WHERE dept=?"
+   const sql = `SELECT * FROM courses WHERE dept=? LIMIT 10 OFFSET ${req.body.offset-1}`
    db.all(sql, [req.body.dept], (err, rows) => {
      if (err) {
        return console.error(err.message);
@@ -736,6 +736,9 @@ html=html+ `<tr><td>${element.course_code}</td><td>${element.cat}</td><td>${elem
   
 
 });
+app.get('/dash', urlencodedParser, function (req, res) {
+res.render("welcome")
+})
 app.get('/printpreview/:userid', urlencodedParser, function (req, res) {
   const pos=1;
 
@@ -986,6 +989,26 @@ app.post('/name', urlencodedParser, function (req, res){
    });
    const sql = "SELECT * from cat where reg_no=? order by course_code"
    db.all(sql, [req.body.stud], (err, rows) => {
+     if (err) {
+       return console.error(err.message);
+     }
+     //res.setHeader('Content-Type', 'application/pdf');
+     res.send(rows)
+     console.log(req.body.stud)
+  
+   });
+ 
+});
+app.post('/gradechart', urlencodedParser, function (req, res){
+ 
+  let db = new sqlite3.Database('./db/chinook.db', (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+   });
+   const sql = "SELECT * from cat "
+   db.all(sql, [], (err, rows) => {
      if (err) {
        return console.error(err.message);
      }
